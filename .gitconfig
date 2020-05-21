@@ -1,0 +1,16 @@
+[user]
+	email = leon@fiit.tv
+	name = Leon Aves
+	signingkey = 993FDDD2C94AA8FC
+[core]
+	excludesfile = /Users/leonaves/.gitignore
+[push]
+	default = current
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /private/var/folders/88/bj5wgyjx47dd3ng1s71nrhtm0000gp/T/AppTranslocation/14218428-D288-4619-BA80-2FE93044F4E4/d/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/leon/.stCommitMsg

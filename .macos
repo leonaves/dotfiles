@@ -1,0 +1,206 @@
+#!/usr/bin/env bash
+
+# ~/.macos — based on https://mths.be/macos
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Allow opening apps from anywhere
+sudo spctl --master-disable
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Save to disk (not to iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# Disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Disable Resume system-wide
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
+
+# Disable automatic termination of inactive apps
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+
+# Disable automatic capitalization as it’s annoying when typing code
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# Disable smart dashes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Disable automatic period substitution as it’s annoying when typing code
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+# Disable smart quotes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Show the ~/Library folder
+chflags nohidden ~/Library
+
+# Disable holding showing accent menu
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Set key repeat rate delay to super low 
+defaults write -g InitialKeyRepeat -int 10
+
+# Set key repeat rate to super fast (lower is faster — time between repeats)
+defaults write -g KeyRepeat -int 1
+
+# Set Dock height
+defaults write com.apple.dock tilesize -int 46
+
+# Don't rearrange spaces based on recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# Don’t show recent applications in Dock
+defaults write com.apple.dock show-recents -bool false
+
+# Show expanded control strip in touch bar
+defaults write ~/Library/Preferences/com.apple.touchbar.agent.plist PresentationModeGlobal fullControlStrip
+
+# Customize control strip to be: mute, volume, brightness, media, do not disturb, lock, with custom spacing
+defaults write ~/Library/Preferences/com.apple.controlstrip FullCustomized '(com.apple.system.mute, com.apple.system.volume, NSTouchBarItemIdentifierFlexibleSpace, com.apple.system.brightness, NSTouchBarItemIdentifierFlexibleSpace, NSTouchBarItemIdentifierFlexibleSpace, com.apple.system.group.media, NSTouchBarItemIdentifierFlexibleSpace, NSTouchBarItemIdentifierFlexibleSpace, NSTouchBarItemIdentifierFlexibleSpace, com.apple.system.do-not-disturb, com.apple.system.screen-lock )'
+
+# Turn off force click (neither seems to work)
+defaults write -g com.apple.trackpad.forceClick -bool false
+defaults write -g com.apple.mouse.forceClick -bool false
+
+# Show volume, clock and bluetooth in menu bar
+defaults write ~/Library/Preferences/com.apple.systemuiserver menuExtras '("/System/Library/CoreServices/Menu Extras/Clock.menu", "/System/Library/CoreServices/Menu Extras/Bluetooth.menu", "/System/Library/CoreServices/Menu Extras/Battery.menu", "/System/Library/CoreServices/Menu Extras/Volume.menu" )'
+
+# Hide siri from menu bar
+defaults write com.apple.Siri StatusMenuVisible -bool false
+
+# Show battery percentage
+defaults write com.apple.menuextra.battery ShowPercent YES
+
+# Swipe down for app expose
+defaults write com.apple.Dock showAppExposeGestureEnabled -int 1
+
+
+
+#########
+# Shell #
+#########
+
+# clone oh my zsh
+git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+
+# install bullet train
+curl -sL https://raw.github.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme > ~/.oh-my-zsh/custom/themes/bullet-train.zsh-theme
+
+# Install powerline fonts
+git clone https://github.com/powerline/fonts.git
+./fonts/.install.sh
+rm -rf fonts
+
+################
+# Applications #
+################
+
+# Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+[ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
+
+# Install homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Install empire
+brew install emp
+
+# Install jq
+brew install jq
+
+# Install yarn
+brew install yarn
+
+# Install mac app store CLI
+brew install mas
+
+# Install magnet, gif brewery, pixelmator, spark from mac app store
+mas install 441258766
+mas install 1081413713
+mas install 407963104
+mas install 1176895641
+
+# Install 1password
+brew cask install 1password
+
+# Install PHPStorm
+brew cask install phpstorm
+
+# Install Google Chrome
+brew cask install google-chrome
+
+# Install Caffeine
+brew cask install caffeine
+
+# Install iTerm
+brew cask install iterm
+
+# Install WhatsApp
+brew cask install whatsapp
+
+# Install transmission
+brew cask install transmission
+
+# Install vlc
+brew cask install vlc
+
+# Install Slack
+brew cask install slack
+
+# Install Alfred
+brew cask install alfred
+
+# Install psequel
+brew cask install psequel
+
+# Install postman
+brew cask install postman
+
+# Install sequel pro
+brew cask install sequel-pro
+
+# Install docker
+brew cask install docker
+
+# Install ngrok
+brew cask install ngrok
+
+# Install aws-vault
+brew cask install aws-vault
+
+# Login to docker hub
+docker login --username leonaves
+
+# Open docker to set up
+open /Applications/Docker.app
+
+# Run caffeine to set up
+open /Applications/Caffeine.app
+
+# Run magnet to set up
+open /Applications/Magnet.app
+
+# Run Alfred to set up
+open /Applications/Alfred 4.app
