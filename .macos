@@ -110,7 +110,7 @@ curl -sL https://raw.github.com/caiogondim/bullet-train-oh-my-zsh-theme/master/b
 
 # Install powerline fonts
 git clone https://github.com/powerline/fonts.git
-./fonts/.install.sh
+./fonts/install.sh
 rm -rf fonts
 
 ################
@@ -155,7 +155,7 @@ brew cask install google-chrome
 brew cask install caffeine
 
 # Install iTerm
-brew cask install iterm
+brew cask install iterm2
 
 # Install WhatsApp
 brew cask install whatsapp
