@@ -68,8 +68,6 @@ if [ $ITERM_SESSION_ID ]; then
   export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND";
 fi
 
-export EMPIRE_API_URL=https://main-empire.fiit-tech.net
-
 alias dio='doctl --context lemonarc'
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -87,11 +85,8 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 alias allsites="doctl compute droplet list --output json | jq -r '.[] | [.name, .networks.v4[0].ip_address] | @tsv' | while IFS=$'\t' read -r name ip; do echo \"$name $ip\" && ssh root@\"$ip\" 'ls -la /var/www' < /dev/null; done"
 
-export PATH="$HOME/miniconda3/bin:$PATH"
-
 export PATH="$PATH:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
 
 source <(kubectl completion zsh)
-alias qconsole="qconsole-macos -s /usr/local/share/qconsole/scripts"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
