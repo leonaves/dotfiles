@@ -74,15 +74,8 @@ defaults write com.apple.dock mru-spaces -bool false
 # Don’t show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
 
-# Show expanded control strip in touch bar
-defaults write ~/Library/Preferences/com.apple.touchbar.agent.plist PresentationModeGlobal fullControlStrip
-
-# Customize control strip to be: mute, volume, brightness, media, do not disturb, lock, with custom spacing
-defaults write ~/Library/Preferences/com.apple.controlstrip FullCustomized '(com.apple.system.mute, com.apple.system.volume, NSTouchBarItemIdentifierFlexibleSpace, com.apple.system.brightness, NSTouchBarItemIdentifierFlexibleSpace, NSTouchBarItemIdentifierFlexibleSpace, com.apple.system.group.media, NSTouchBarItemIdentifierFlexibleSpace, NSTouchBarItemIdentifierFlexibleSpace, NSTouchBarItemIdentifierFlexibleSpace, com.apple.system.do-not-disturb, com.apple.system.screen-lock )'
-
-# Turn off force click (neither seems to work)
-defaults write -g com.apple.trackpad.forceClick -bool false
-defaults write -g com.apple.mouse.forceClick -bool false
+# Turn off force click
+defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool true
 
 # Show volume, clock and bluetooth in menu bar
 defaults write ~/Library/Preferences/com.apple.systemuiserver menuExtras '("/System/Library/CoreServices/Menu Extras/Clock.menu", "/System/Library/CoreServices/Menu Extras/Bluetooth.menu", "/System/Library/CoreServices/Menu Extras/Battery.menu", "/System/Library/CoreServices/Menu Extras/Volume.menu" )'
@@ -95,8 +88,6 @@ defaults write com.apple.menuextra.battery ShowPercent YES
 
 # Swipe down for app expose
 defaults write com.apple.Dock showAppExposeGestureEnabled -int 1
-
-
 
 #########
 # Shell #
@@ -118,11 +109,13 @@ rm -rf fonts
 ################
 
 # Install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 [ -s "$HOME/.nvm/nvm.sh" ] && \. "$HOME/.nvm/nvm.sh"
 
 # Install homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/leonaves/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Install empire
 brew install emp
@@ -143,52 +136,52 @@ mas install 407963104
 mas install 1176895641
 
 # Install 1password
-brew cask install 1password
+brew install --cask 1password
 
 # Install PHPStorm
-brew cask install phpstorm
+brew install --cask phpstorm
 
 # Install Google Chrome
-brew cask install google-chrome
+brew install --cask google-chrome
 
 # Install Caffeine
-brew cask install caffeine
+brew install --cask caffeine
 
 # Install iTerm
-brew cask install iterm2
+brew install --cask iterm2
 
 # Install WhatsApp
-brew cask install whatsapp
+brew install --cask whatsapp
 
 # Install transmission
-brew cask install transmission
+brew install --cask transmission
 
 # Install vlc
-brew cask install vlc
+brew install --cask vlc
 
 # Install Slack
-brew cask install slack
+brew install --cask slack
 
 # Install Alfred
-brew cask install alfred
+brew install --cask alfred
 
 # Install psequel
-brew cask install psequel
+brew install --cask psequel
 
 # Install postman
-brew cask install postman
+brew install --cask postman
 
 # Install sequel pro
-brew cask install sequel-pro
+brew install --cask sequel-pro
 
 # Install docker
-brew cask install docker
+brew install --cask docker
 
 # Install ngrok
-brew cask install ngrok
+brew install --cask ngrok
 
 # Install aws-vault
-brew cask install aws-vault
+brew install --cask aws-vault
 
 # Login to docker hub
 docker login --username leonaves
